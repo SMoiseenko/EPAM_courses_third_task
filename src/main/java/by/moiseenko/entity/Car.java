@@ -1,32 +1,48 @@
 package by.moiseenko.entity;
 
-import java.util.Random;
-import java.util.concurrent.Semaphore;
+import org.apache.log4j.Logger;
 
 /**
  * @author moiseenko-s
  *
  */
 public class Car extends Thread {
-	Semaphore semaphore;
-	int carId = 0;
+    private static final Logger logger = Logger.getLogger(Car.class);
 
-	public Car(Semaphore semaphore, int carId) {
-		this.semaphore = semaphore;
-		this.carId = carId;
-		System.out.printf("Car %d had come.\n", carId);
+    private boolean parkedAtLot;
+    private Pool carPool;
+
+    public Car(Pool carPool, String name) {
+	this.carPool = carPool;
+	this.setName(name);
+	logger.debug(this.getName() + " created.");
+    }
+
+    public void run() {
+	Lot lot = null;
+	while (lot == null) { // нет парковки, ждем 7000
+
+	    logger.debug(this.getName() + " waiting for parking");
+
+	    lot = carPool.getLot(7000);//
 	}
 
-	public void run() {
-		try {
-			semaphore.acquire();
-			System.out.printf("Car %d parked.\n", carId);
-			Thread.sleep((long) (Math.random() * 3000) + 500);
-		} catch (InterruptedException e) {
-			System.out.printf("Car was anigilated!!!\n");
-		}
-		semaphore.release();
-		System.out.printf("Car %d left parking.\n", carId);
-	}
+	logger.debug(this.getName() + " parked at lot № " + lot.getLotID());
+
+	parkedAtLot = true;
+	lot.parkedAtLot();
+	parkedAtLot = false;
+	carPool.leaveLot(lot);
+	logger.debug(this.getName() + " leave lot № " + lot.getLotID());
+	
+/*
+	while (true) {
+	    if (carPool.leaveLot(lot)) {
+		logger.debug(this.getName() + " leave lot № " + lot.getLotID());
+		break;
+	    }
+	}*/
+
+    }
 
 }

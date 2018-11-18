@@ -1,26 +1,27 @@
 package by.moiseenko;
 
-import java.util.concurrent.Semaphore;
+import org.apache.log4j.Logger;
 
 import by.moiseenko.entity.Car;
+import by.moiseenko.entity.Pool;
+import by.moiseenko.service.RandomTime;
 
 public class Program {
-	public static void main(String[] args) {
+    private static final Logger logger = Logger.getLogger(Program.class);
 
-		Semaphore semaphore = new Semaphore(2);
+    public static void main(String[] args) {
 
-		try {
-			Car car = null;
-			for (int a = 1; a < 10; a++) {
-				car = new Car(semaphore, a);
-				car.start();
-				Thread.sleep(100);
-			}
-			car.join();
-		} catch (InterruptedException e) {
-			System.out.println("Park was destroyed");
-		}
+	Pool carPool = new Pool();
+	
 
-		System.out.println("No more cars");
+	for (int i = 0; i < 10; i++) {
+	    new Car(carPool, "Car № " + i).start();
+	    try {
+		Thread.sleep(RandomTime.randomTime(50, 100));
+	    } catch (InterruptedException e) {
+		logger.error("Thread was interrupted!!!");
+	    }
 	}
+
+    }
 }
