@@ -17,16 +17,13 @@ public class Pool {
 	
 	if (lot != null) { //если свободен - то вернем место
 	    toReturn = lot;
-	} else { // иначе умрем где?
-	   
-	    logger.debug(Thread.currentThread().getName() + " go away");
-	}
-
+	} 
 	return toReturn;
     }
     
     public boolean leaveLot(Lot lot) {
 	boolean toReturn = false;
+	parking.leavelot(lot);
 	if (lock.tryLock()) {
 	    toReturn = true;
 	    lock.unlock();

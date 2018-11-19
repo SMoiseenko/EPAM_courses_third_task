@@ -23,7 +23,7 @@ public class Lot {
     public void parkedAtLot() {
 	try {
 	    logger.debug("Parking Lot № " + lotID + " using by car " + Thread.currentThread().getName());
-	    Thread.sleep(RandomTime.randomTime(300, 500));
+	    Thread.sleep(RandomTime.randomTime(1000, 3000));
 	} catch (InterruptedException e) {
 	    logger.error("Thread was interrupted!!!");
 	}

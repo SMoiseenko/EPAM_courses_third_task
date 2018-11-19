@@ -43,6 +43,7 @@ public class Parking {
     }
 
     public boolean leavelot(Lot lot) {
+	semaphore.release();
 	return parkingLots.add(lot);
     }
 }
