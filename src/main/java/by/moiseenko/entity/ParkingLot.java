@@ -2,17 +2,16 @@ package by.moiseenko.entity;
 
 import org.apache.log4j.Logger;
 
-import by.moiseenko.service.RandomTime;
-
 /**
+ * Class that emulate parking lot occupied by car for 2000ms;
  * @author moiseenko-s
  *
  */
-public class Lot {
-    private static final Logger logger = Logger.getLogger(Lot.class);
+public class ParkingLot {
+    private static final Logger logger = Logger.getLogger(ParkingLot.class);
     private int lotID;
 
-    public Lot(int lotID) {
+    public ParkingLot(int lotID) {
 	this.lotID = lotID;
     }
 
@@ -22,8 +21,7 @@ public class Lot {
 
     public void parkedAtLot() {
 	try {
-	    logger.debug("Parking Lot № " + lotID + " using by car " + Thread.currentThread().getName());
-	    Thread.sleep(RandomTime.randomTime(1000, 3000));
+	    Thread.sleep(2000);
 	} catch (InterruptedException e) {
 	    logger.error("Thread was interrupted!!!");
 	}
