@@ -18,7 +18,7 @@ Use the features of the **java.util.concurrent** and **java.util.concurrent.lock
 Do not use the *synchronized* method.
 All entities wishing to access the resource must be threads.
 
-**Parking:** There are several parking lot available in the parking space. At one lot there can be only one car. If all lots are occupied, the car will not wait more than a certain time and will leave. Cars parked nearby can change their parking lots.
+**Parking:** There are several parking lot available in the parking space. At one lot can be only one car. If all lots are occupied, the car will not wait more than a certain time and will leave. Cars parked nearby can change their parking lots.
 
 - [ ] Testing performance through tests (*testNG*).
 - [x] Use the logging mechanism (*log4j*).
