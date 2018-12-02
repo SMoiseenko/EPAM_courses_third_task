@@ -1,35 +1,22 @@
 package by.moiseenko.entity;
 
-import org.apache.log4j.Logger;
-
 /**
- * @author moiseenko-s
- *
+ * Class that emulate car with next parameters <i>name</i>, <i>parkedTime</i>
+ * and <i>maxWaitTime</i>
+ * 
+ * @author s-moiseenko
  */
-public class Car extends Thread {
-    private static final Logger logger = Logger.getLogger(Car.class);
+public abstract class Car {
 
-    private ParkingSpace carPatking;
+    protected long parkedTime;
+    protected long maxWaitTime;
+    protected int name;
 
-    public Car(ParkingSpace carPatking, int name) {
-	this.carPatking = carPatking;
-	this.setName("Car №" + name);
-	logger.debug(this.getName() + " created.");
-    }
-@Override
-    public void run() {
+    public Car(long maxWaitTime, long parkedTime, int name) {
 
-	//logger.debug(this.getName() + " waiting for parking.");
-	ParkingLot lot = carPatking.tryTakeLot(3000L);//
-
-	if (lot != null) {
-	    logger.debug(this.getName() + " parked at lot №" + lot.getLotID() + ".");
-	    lot.parkedAtLot();
-	    carPatking.leaveLot(lot);
-	    logger.debug(this.getName() + " leave lot №" + lot.getLotID() + ".");
-	} else {
-	    logger.debug(this.getName() + " can't wait anymore and drive away.");
-	}
+	this.parkedTime = parkedTime;
+	this.maxWaitTime = maxWaitTime;
+	this.name = name;
     }
 
 }
