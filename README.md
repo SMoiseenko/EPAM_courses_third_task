@@ -8,7 +8,7 @@
 
 **Автостоянка:** На стоянке доступно несколько машиномест. На одном месте может находиться только один автомобиль. Если все места заняты, то автомобиль не станет ждать больше определенного времени и уедет. Припаркованные рядом автомобили могут поменяться своими парковочными местами.
 
-- [ ] Проверка работоспособности через тесты (*testNG*).
+- [x] Проверка работоспособности через тесты (*testNG*).
 - [x] Использовать механизм логгирования (*log4j*).
 - [x] Использовать библиотеки сборки (*maven*).
 
@@ -20,6 +20,6 @@ All entities wishing to access the resource must be threads.
 
 **Parking:** There are several parking lot available in the parking space. At one lot can be only one car. If all lots are occupied, the car will not wait more than a certain time and will leave. Cars parked nearby can change their parking lots.
 
-- [ ] Testing performance through tests (*testNG*).
+- [x] Testing performance through tests (*testNG*).
 - [x] Use the logging mechanism (*log4j*).
 - [x] Use build libraries (*maven*).
